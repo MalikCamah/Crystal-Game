@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <title>Crystal Document</title>
+  <style>
+
+  body {
+    background: #cccccc url(pentagon.png) repeat;
+  }
+
+  img {
+    width:150px;
+    height:150px;
+    cursor: pointer;
+  }
+
+  h1 {
+    border:1px solid #cccccc;
+    border-right: none;
+    padding:10px;
+    background-color:#ffa100;
+    box-shadow:1px 2px 3px #000000;
+
+  }
+
+  p {
+    background-color:rgba(249, 216, 0, 0.52);
+    border:2px solid #666666;
+    box-shadow: 2px 1px 2px #000000;
+    padding:10px
+  }
+
+#randomNumber {
+  font-size: 20px;
+  background-color:rgba(85, 189, 105, 0.66);
+  border: 1px solid #000000;
+  box-shadow: 1px 2px 3px #000000;
+
+  padding:20px;
+  text-align: center;
+}
+
+#finalTotal {
+  font-size: 35px;
+  background-color:rgba(205, 40, 40, 0.68);
+  text-align: center;
+  border:1px solid #000000;
+  box-shadow: 1px 2px 3px #000000;
+
+}
+
+#wins,
+#losses {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+<div class="row">
+<div class="col-md-3">
+
+
+  <h1><span>Crystals Collector!</span></h1>
+</div>
+</div>
+
+
+
+
+<div class="row">
+<div class="col-md-4">
+<p>You will be given a random numbner at the start of the game.
+
+<br>
+<br>
+
+There are four crystals below. By clickin on a crystal you will add a specific amount of points to your total score.
+
+<br>
+<br>
+
+You win the game by matching your total score to random number, you lose the game if your totak score goes above the random numnber.
+
+<br>
+<br>
+
+The value of each crystal is hidden from you until you click on it.
+
+<br>
+<br>
+
+Each time when the game start, the game will change the values of each crystal.</p>
+</div>
+</div>
+
+<div class="row">
+<div class="col-md-3">
+<div id="randomNumber"></div>
+</div>
+<div class="col-md-2">
+  <div id="wins"></div>
+  <div id="losses"></div>
+</div>
+</div>
+
+
+
+
+
+<div id="randomCrystals">
+<img src="ruby.png" alt="ruby img" id="one">
+<img src="sapphire.png" alt="sapp img" id="two">
+<img src="topaz.png" alt="topaz img" id="three">
+<img src="emerald.png" alt="emerald img" id="four">
+</div>
+
+<div class="row">
+<div class="col-md-3">
+<div id="finalTotal"></div>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+</div>
+
+<script type="text/javascript">
+
+
+var randomNumber = Math.floor(Math.random() * 120);
+console.log("Random Number " + randomNumber);
+
+
+var ruby = Math.floor(Math.random() * 5)
+console.log("Ruby " + ruby);
+
+var sapphire = Math.floor(Math.random() * 10)
+console.log("Sapphire " + sapphire);
+
+var topaz = Math.floor(Math.random() * 20)
+console.log("Topaz " + topaz);
+
+var emerald = Math.floor(Math.random() * 30)
+console.log("Emerald " + emerald);
+
+
+var userTotal = 0;
+var wins = 0;
+var losses = 0 ;
+
+// generate random number value when button of image is clicked
+
+
+function newGame(){
+
+$("#randomNumber").empty("");
+
+randomNumber = Math.floor(Math.random() * 120);
+console.log("SECOND RAN NUM " + randomNumber);
+$("#randomNumber").text("Computer's Choice: " + randomNumber);
+
+ruby = Math.floor(Math.random() * 5);
+
+sapphire = Math.floor(Math.random() * 10);
+
+topaz = Math.floor(Math.random() * 20);
+
+emerald = Math.floor(Math.random() * 30);
+
+userTotal = 0;
+
+$("#finalTotal").empty("");
+};
+
+function winner() {
+alert("You WIN!");
+wins++;
+$("#wins").text("Win Count: " + wins);
+newGame();
+};
+
+function loser() {
+alert("You Lose");
+losses++;
+$("#losses").text("Loss Count: " + losses)
+newGame();
+
+};
+
+// document.getElementById("randomNumber").innerHTML = "Random Number " + randomNumber;
+// document.getElementById("totalScore").innerHTML = userTotal
+
+// Jewels Click
+$("#one").on("click", function(){
+userTotal = userTotal + ruby;
+console.log(ruby);
+console.log(userTotal);
+$("#finalTotal").text(userTotal);
+// document.getElementById("totalScore").innerHTML = userTotal
+// Add Conditional Statements for winning and lossing
+if(userTotal > randomNumber ){
+  loser();
+}else if(userTotal === randomNumber){
+  winner();
+}});
+
+$("#two").on("click", function(){
+userTotal = userTotal + sapphire;
+console.log(sapphire);
+console.log(userTotal);
+$("#finalTotal").text(userTotal);
+// document.getElementById("totalScore").innerHTML = userTotal
+// Add Conditional Statements for winning and lossing
+if(userTotal > randomNumber ){
+  loser();
+
+} else if (userTotal === randomNumber){
+  winner();
+}});
+
+
+$("#three").on("click", function(){
+userTotal = userTotal + topaz;
+console.log(topaz);
+console.log(userTotal);
+$("#finalTotal").text(userTotal);
+// document.getElementById("totalScore").innerHTML = userTotal
+// Add Condiitonal Statements for winning and lossing
+if(userTotal > randomNumber){
+  loser();
+} else if(userTotal === randomNumber){
+  winner();
+}});
+
+$("#four").on("click", function(){
+userTotal = userTotal + emerald;
+console.log(emerald);
+console.log(userTotal);
+$("#finalTotal").text(userTotal);
+// document.getElementById("totalScore").innerHTML = userTotal
+if(userTotal > randomNumber){
+  loser();
+} else if(userTotal === randomNumber){
+  winner();
+}});
+
+document.getElementById("randomNumber").innerHTML = "Computer's Choice: " + randomNumber;
+
+
+
+</script>
+</body>
+</html>
